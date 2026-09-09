@@ -1,0 +1,224 @@
+Database project starter
+Number of statements: 74
+1Identifying statement:
+ 		create database university
+		CREATE statement identified
+2Identifying statement:
+ 		  use university
+		USE statement identified
+3Identifying statement:
+ 		  create table x(id integer , name text)
+		CREATE statement identified
+4Identifying statement:
+ 		  create table student(a  text )
+		CREATE statement identified
+5Identifying statement:
+ 		  select x,y,z  from student  where x=y or y!=z
+		SELECT statement identified
+6Identifying statement:
+ 		  describe student
+		DESCRIBE statement identified
+7Identifying statement:
+ 		  let x select id,name from student
+		LET statement identified
+8Identifying statement:
+ 		  rename x(a,b,c)  
+		RENAME statement identified
+9Identifying statement:
+ 		  insert  student values("abc","x","aaa",1,2,"yy"  )  
+		INSERT statement identified
+10Identifying statement:
+ 		  insert  student values("abc","x","aaa",1,2.345,"yy")
+		INSERT statement identified
+11Identifying statement:
+ 		  update student set x="abc",y=1,z="dd"  
+		UPDATE statement identified
+12Identifying statement:
+ 		  update student set x="abc",y=1,z="dd" where a<=b  
+		UPDATE statement identified
+13Identifying statement:
+ 		  update student set x="abc",y=1,z="dd" where a>c or  b=d  
+		UPDATE statement identified
+14Identifying statement:
+ 		  update student set x="abc",y=1,z="dd"  
+		UPDATE statement identified
+15Identifying statement:
+ 		    delete  student  
+		DELETE statement identified
+16Identifying statement:
+ 		    delete  x
+		DELETE statement identified
+17Identifying statement:
+ 		    use y
+		USE statement identified
+18Identifying statement:
+ 		    Create student
+		CREATE statement identified
+19Identifying statement:
+ 		  select from student
+		SELECT statement identified
+20Identifying statement:
+ 		  select student
+		SELECT statement identified
+21Identifying statement:
+ 		  create table student()
+		CREATE statement identified
+22Identifying statement:
+ 		  create table student(id,id)
+		CREATE statement identified
+23Identifying statement:
+ 		  use
+		USE statement identified
+24Identifying statement:
+ 		  rename student)
+		RENAME statement identified
+25Identifying statement:
+ 		  create database db3
+		CREATE statement identified
+26Identifying statement:
+ 		    use db3
+		USE statement identified
+27Identifying statement:
+ 		  create table st(id integer primary key, name text, gpa float)
+		CREATE statement identified
+28Identifying statement:
+ 		  create table prof  (pname text   ,  ssn integer)
+		CREATE statement identified
+29Identifying statement:
+ 		 insert  st values (3, "C", 3.0)
+		INSERT statement identified
+30Identifying statement:
+ 		 insert  st values (2, "B", 2.0)
+		INSERT statement identified
+31Identifying statement:
+ 		   insert  st values (  1, "Abe", 3.5)
+		INSERT statement identified
+32Identifying statement:
+ 		 insert  st values (2, "Berror", 2.0)
+		INSERT statement identified
+33Identifying statement:
+ 		  insert  st values (5, "E", 5)
+		INSERT statement identified
+34Identifying statement:
+ 		 insert  st values (4, "D", 4.44)
+		INSERT statement identified
+35Identifying statement:
+ 		  insert  st values (6, "F", 6.0)
+		INSERT statement identified
+36Identifying statement:
+ 		    insert  st values (4, "Derror", 2.0)
+		INSERT statement identified
+37Identifying statement:
+ 		   insert  prof values ("ABE", 11)
+		INSERT statement identified
+38Identifying statement:
+ 		  insert  prof values ("C", 33)
+		INSERT statement identified
+39Identifying statement:
+ 		   let st2 KEY ssn select name, gpa, ssn from st,prof where pname=name or gpa=3.0
+		LET statement identified
+40Identifying statement:
+ 		  select name, gpa, ssn from st2
+		SELECT statement identified
+41Identifying statement:
+ 		  select name, gpa, ssn from st2 where ssn=2
+		SELECT statement identified
+42Identifying statement:
+ 		  select name, gpa, ssn from st2 where ssn=2 and gpa=3.0
+		SELECT statement identified
+43Identifying statement:
+ 		 select name, gpa, ssn from st2 where ssn=2 and gpa!=3.0
+		SELECT statement identified
+44Identifying statement:
+ 		    select name, gpa, ssn from st,prof where pname=name
+		SELECT statement identified
+45Identifying statement:
+ 		  select name,ssn from prof,st where name=pname and gpa=3.0
+		SELECT statement identified
+46Identifying statement:
+ 		 select name,ssn from prof,st where name=pname or gpa=2.0
+		SELECT statement identified
+47Identifying statement:
+ 		 select name,ssn from prof,st where name=pname and pname="C" and gpa=3.0
+		SELECT statement identified
+48Identifying statement:
+ 		  select gpa from student where gpa>=3.0 and gpa!=4.44
+		SELECT statement identified
+49Identifying statement:
+ 		  select name, gpa from student where id=3 and gpa=3.0 and name="C"
+		SELECT statement identified
+50Identifying statement:
+ 		 select name, gpa from student where id!=3 and gpa=3.0 and name="C"
+		SELECT statement identified
+51Identifying statement:
+ 		   create table third (x integer)
+		CREATE statement identified
+52Identifying statement:
+ 		  insert  third values(1)
+		INSERT statement identified
+53Identifying statement:
+ 		  insert   third values(2)
+		INSERT statement identified
+54Identifying statement:
+ 		    select name, ssn, x from third, st, prof where name=pname and id=x
+		SELECT statement identified
+55Identifying statement:
+ 		  delete st where name="Abe"
+		DELETE statement identified
+56Identifying statement:
+ 		  delete prof where ssn>=33
+		DELETE statement identified
+57Identifying statement:
+ 		  select ssn from prof
+		SELECT statement identified
+58Identifying statement:
+ 		  select name, gpa, ssn from st,prof where pname=name
+		SELECT statement identified
+59Identifying statement:
+ 		   describe prof
+		DESCRIBE statement identified
+60Identifying statement:
+ 		  describe all
+		DESCRIBE statement identified
+61Identifying statement:
+ 		  update st set gpa=0.00, name="X" where gpa != 4.0
+		UPDATE statement identified
+62Identifying statement:
+ 		  select name, gpa from student
+		SELECT statement identified
+63Identifying statement:
+ 		  update st set name="abc", gpa=1.1 where id=1
+		UPDATE statement identified
+64Identifying statement:
+ 		    update st set name="abc",id=2, gpa=3.0 where id < gpa
+		UPDATE statement identified
+65Identifying statement:
+ 		   Select name, gpa, id from st
+		SELECT statement identified
+66Identifying statement:
+ 		   rename st (x,y,z)
+		RENAME statement identified
+67Identifying statement:
+ 		 select y, z from st
+		SELECT statement identified
+68Identifying statement:
+ 		  describe st
+		DESCRIBE statement identified
+69Identifying statement:
+ 		   Select max(gpa) from st
+		SELECT statement identified
+70Identifying statement:
+ 		 Select min(gpa) from st where id>2 and name="John Doe"
+		SELECT statement identified
+71Identifying statement:
+ 		 Select average(gpa) from st where id>2
+		SELECT statement identified
+72Identifying statement:
+ 		 Select count(*) from st where id>2 or name="John Doe"
+		SELECT statement identified
+73Identifying statement:
+ 		   exit
+		EXIT statement identified
+74Identifying statement:
+ 		 
+Empty statement
