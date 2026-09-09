@@ -90,6 +90,16 @@ void statement_separator(char separated_statements[][MAX_BUFFER], int* num_state
 //     return 0;
 // }
 
+void identify_tokens (char *statement){
+    char *TYPES[] = {"KEYWORD", "IDENTIFIER", "OPERATOR", "LITERAL", "SEPARATOR"};
+
+}
+
+void create_parser(char *statement) {
+    printf("Creating statement:\n \t\t%s\n", statement);
+    
+}
+
 void statement_identifier(char *statement) {
     printf("Identifying statement:\n \t\t%s\n", statement);
 
