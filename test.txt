@@ -1,1 +1,3 @@
 create database university;
+
+https://database-builder-tutorial.ai.studio/
