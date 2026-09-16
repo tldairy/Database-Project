@@ -276,9 +276,6 @@ void parse_select(ParserState* state) {
     while (1) {
         if (!parse_select_item(state)) {
             printf("\nSyntax Error: Expected column name, '*' or aggregate function near '%s'\n", state->current_token.text);
-            printf("Token Type: ");
-            print_token_type(state->current_token.type);
-            printf("\n");
             return;
         }
 
@@ -313,8 +310,6 @@ void parse_select(ParserState* state) {
 }
 
 void parse_insert(ParserState* state) {
-    printf("Parsing INSERT INTO statement:\n");
-
     if (state->current_token.type != TOKEN_INSERT) {
         printf("Syntax Error: Expected INSERT near '%s'\n", state->current_token.text);
         return;
