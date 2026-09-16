@@ -624,8 +624,9 @@ void parse_create (ParserState* state) {
         advance(state); // Consume TABLE
         parse_create_table(state);
         advance(state); // Consume closing parenthesis of CREATE TABLE
-    } else if (state->current_token.type == TOKEN_IDENTIFIER) {
-        printf("Creating Database(s):");
+    }else if (state->current_token.type == TOKEN_IDENTIFIER && strcasecmp(state->current_token.text, "database") == 0) {
+        advance(state); // Consume DATABASE
+        printf("  Creating Database(s):");
         while (state->current_token.type != TOKEN_EOF) {
             printf("[%s] ", state->current_token.text);
             advance(state);

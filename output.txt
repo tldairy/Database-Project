@@ -5,7 +5,7 @@ Number of statements: 74
 Statement number: 1
 Identifying statement:create database university
 Statement identified:  CREATE
-Creating Database(s):[database] [university] 
+  Creating Database(s):[university] 
 
 Statement number: 2
 Identifying statement:  use university
@@ -94,7 +94,7 @@ Using Database: [y]
 Statement number: 18
 Identifying statement:    Create student
 Statement identified:  CREATE
-Creating Database(s):[student] 
+Syntax Error: Expected TABLE after CREATE near 'student'
 
 Statement number: 19
 Identifying statement:  select from student
@@ -136,7 +136,7 @@ Statement identified:  RENAME
 Statement number: 25
 Identifying statement:  create database db3
 Statement identified:  CREATE
-Creating Database(s):[database] [db3] 
+  Creating Database(s):[db3] 
 
 Statement number: 26
 Identifying statement:    use db3
