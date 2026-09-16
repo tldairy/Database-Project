@@ -643,7 +643,7 @@ void parse_use (ParserState* state) {
         printf("Syntax Error: Expected USE near '%s'\n", state->current_token.text);
         return;
     }
-    advance(state); // Consume USE
+    advance(state); //Consume USE
 
     if (state->current_token.type != TOKEN_IDENTIFIER) {
         printf("Syntax Error: Expected database name after USE near '%s'\n", state->current_token.text);
