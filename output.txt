@@ -1,347 +1,346 @@
 Database project starter
 Number of statements: 74
-1Identifying statement:
- 		create database university
+Statement number: 1
+Identifying statement:		create database university
 		CREATE statement identified
-2Identifying statement:
- 		  use university
+[database] [university] Statement number: 2
+Identifying statement:		  use university
 		USE statement identified
-3Identifying statement:
- 		  create table x(id integer , name text)
+Statement number: 3
+Identifying statement:		  create table x(id integer , name text)
 		CREATE statement identified
-4Identifying statement:
- 		  create table student(a  text )
+[table] [x] 
+Syntax Error: Expected table name near '('
+Statement number: 4
+Identifying statement:		  create table student(a  text )
 		CREATE statement identified
-5Identifying statement:
- 		  select x,y,z  from student  where x=y or y!=z
+[table] [student] 
+Syntax Error: Expected table name near '('
+Statement number: 5
+Identifying statement:		  select x,y,z  from student  where x=y or y!=z
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [x] [y] [z] 
-  From Table: [student]
-Warning: Trailing unexpected tokens left over.
-6Identifying statement:
- 		  describe student
+  From Tables: [student] 
+  Condition: [x] [op:=] [y]   Logic: [or]   Condition: [y] [op:!=] [z] Success: Statement parsed cleanly.
+Statement number: 6
+Identifying statement:		  describe student
 		DESCRIBE statement identified
-7Identifying statement:
- 		  let x select id,name from student
+Statement number: 7
+Identifying statement:		  let x select id,name from student
 		LET statement identified
-8Identifying statement:
- 		  rename x(a,b,c)  
+Statement number: 8
+Identifying statement:		  rename x(a,b,c)  
 		RENAME statement identified
-9Identifying statement:
- 		  insert  student values("abc","x","aaa",1,2,"yy"  )  
+Statement number: 9
+Identifying statement:		  insert  student values("abc","x","aaa",1,2,"yy"  )  
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'student'
-10Identifying statement:
- 		  insert  student values("abc","x","aaa",1,2.345,"yy")
+Statement number: 10
+Identifying statement:		  insert  student values("abc","x","aaa",1,2.345,"yy")
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'student'
-11Identifying statement:
- 		  update student set x="abc",y=1,z="dd"  
+Statement number: 11
+Identifying statement:		  update student set x="abc",y=1,z="dd"  
 		UPDATE statement identified
-12Identifying statement:
- 		  update student set x="abc",y=1,z="dd" where a<=b  
+Statement number: 12
+Identifying statement:		  update student set x="abc",y=1,z="dd" where a<=b  
 		UPDATE statement identified
-13Identifying statement:
- 		  update student set x="abc",y=1,z="dd" where a>c or  b=d  
+Statement number: 13
+Identifying statement:		  update student set x="abc",y=1,z="dd" where a>c or  b=d  
 		UPDATE statement identified
-14Identifying statement:
- 		  update student set x="abc",y=1,z="dd"  
+Statement number: 14
+Identifying statement:		  update student set x="abc",y=1,z="dd"  
 		UPDATE statement identified
-15Identifying statement:
- 		    delete  student  
+Statement number: 15
+Identifying statement:		    delete  student  
 		DELETE statement identified
-16Identifying statement:
- 		    delete  x
+Statement number: 16
+Identifying statement:		    delete  x
 		DELETE statement identified
-17Identifying statement:
- 		    use y
+Statement number: 17
+Identifying statement:		    use y
 		USE statement identified
-18Identifying statement:
- 		    Create student
+Statement number: 18
+Identifying statement:		    Create student
 		CREATE statement identified
-19Identifying statement:
- 		  select from student
+[student] Statement number: 19
+Identifying statement:		  select from student
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: 
 Syntax Error: Expected column name, '*' or aggregate function near 'from'
-Token Type: TOKEN_FROM
-20Identifying statement:
- 		  select student
+Statement number: 20
+Identifying statement:		  select student
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [student] 
 Syntax Error: Missing FROM clause near 'EOF'
-21Identifying statement:
- 		  create table student()
+Statement number: 21
+Identifying statement:		  create table student()
 		CREATE statement identified
-22Identifying statement:
- 		  create table student(id,id)
+[table] [student] 
+Syntax Error: Expected table name near '('
+Statement number: 22
+Identifying statement:		  create table student(id,id)
 		CREATE statement identified
-23Identifying statement:
- 		  use
+[table] [student] 
+Syntax Error: Expected table name near '('
+Statement number: 23
+Identifying statement:		  use
 		USE statement identified
-24Identifying statement:
- 		  rename student)
+Statement number: 24
+Identifying statement:		  rename student)
 		RENAME statement identified
-25Identifying statement:
- 		  create database db3
+Statement number: 25
+Identifying statement:		  create database db3
 		CREATE statement identified
-26Identifying statement:
- 		    use db3
+[database] [db3] Statement number: 26
+Identifying statement:		    use db3
 		USE statement identified
-27Identifying statement:
- 		  create table st(id integer primary key, name text, gpa float)
+Statement number: 27
+Identifying statement:		  create table st(id integer primary key, name text, gpa float)
 		CREATE statement identified
-28Identifying statement:
- 		  create table prof  (pname text   ,  ssn integer)
+[table] [st] 
+Syntax Error: Expected table name near '('
+Statement number: 28
+Identifying statement:		  create table prof  (pname text   ,  ssn integer)
 		CREATE statement identified
-29Identifying statement:
- 		 insert  st values (3, "C", 3.0)
+[table] [prof] 
+Syntax Error: Expected table name near '('
+Statement number: 29
+Identifying statement:		 insert  st values (3, "C", 3.0)
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'st'
-30Identifying statement:
- 		 insert  st values (2, "B", 2.0)
+Statement number: 30
+Identifying statement:		 insert  st values (2, "B", 2.0)
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'st'
-31Identifying statement:
- 		   insert  st values (  1, "Abe", 3.5)
+Statement number: 31
+Identifying statement:		   insert  st values (  1, "Abe", 3.5)
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'st'
-32Identifying statement:
- 		 insert  st values (2, "Berror", 2.0)
+Statement number: 32
+Identifying statement:		 insert  st values (2, "Berror", 2.0)
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'st'
-33Identifying statement:
- 		  insert  st values (5, "E", 5)
+Statement number: 33
+Identifying statement:		  insert  st values (5, "E", 5)
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'st'
-34Identifying statement:
- 		 insert  st values (4, "D", 4.44)
+Statement number: 34
+Identifying statement:		 insert  st values (4, "D", 4.44)
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'st'
-35Identifying statement:
- 		  insert  st values (6, "F", 6.0)
+Statement number: 35
+Identifying statement:		  insert  st values (6, "F", 6.0)
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'st'
-36Identifying statement:
- 		    insert  st values (4, "Derror", 2.0)
+Statement number: 36
+Identifying statement:		    insert  st values (4, "Derror", 2.0)
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'st'
-37Identifying statement:
- 		   insert  prof values ("ABE", 11)
+Statement number: 37
+Identifying statement:		   insert  prof values ("ABE", 11)
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'prof'
-38Identifying statement:
- 		  insert  prof values ("C", 33)
+Statement number: 38
+Identifying statement:		  insert  prof values ("C", 33)
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'prof'
-39Identifying statement:
- 		   let st2 KEY ssn select name, gpa, ssn from st,prof where pname=name or gpa=3.0
+Statement number: 39
+Identifying statement:		   let st2 KEY ssn select name, gpa, ssn from st,prof where pname=name or gpa=3.0
 		LET statement identified
-40Identifying statement:
- 		  select name, gpa, ssn from st2
+Statement number: 40
+Identifying statement:		  select name, gpa, ssn from st2
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [gpa] [ssn] 
-  From Table: [st2]
+  From Tables: [st2] 
 Success: Statement parsed cleanly.
-41Identifying statement:
- 		  select name, gpa, ssn from st2 where ssn=2
+Statement number: 41
+Identifying statement:		  select name, gpa, ssn from st2 where ssn=2
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [gpa] [ssn] 
-  From Table: [st2]
-Warning: Trailing unexpected tokens left over.
-42Identifying statement:
- 		  select name, gpa, ssn from st2 where ssn=2 and gpa=3.0
+  From Tables: [st2] 
+  Condition: [ssn] [op:=] [2] Success: Statement parsed cleanly.
+Statement number: 42
+Identifying statement:		  select name, gpa, ssn from st2 where ssn=2 and gpa=3.0
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [gpa] [ssn] 
-  From Table: [st2]
-Warning: Trailing unexpected tokens left over.
-43Identifying statement:
- 		 select name, gpa, ssn from st2 where ssn=2 and gpa!=3.0
+  From Tables: [st2] 
+  Condition: [ssn] [op:=] [2]   Logic: [and]   Condition: [gpa] [op:=] [3.0] Success: Statement parsed cleanly.
+Statement number: 43
+Identifying statement:		 select name, gpa, ssn from st2 where ssn=2 and gpa!=3.0
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [gpa] [ssn] 
-  From Table: [st2]
-Warning: Trailing unexpected tokens left over.
-44Identifying statement:
- 		    select name, gpa, ssn from st,prof where pname=name
+  From Tables: [st2] 
+  Condition: [ssn] [op:=] [2]   Logic: [and]   Condition: [gpa] [op:!=] [3.0] Success: Statement parsed cleanly.
+Statement number: 44
+Identifying statement:		    select name, gpa, ssn from st,prof where pname=name
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [gpa] [ssn] 
-  From Table: [st]
-Warning: Trailing unexpected tokens left over.
-45Identifying statement:
- 		  select name,ssn from prof,st where name=pname and gpa=3.0
+  From Tables: [st] [prof] 
+  Condition: [pname] [op:=] [name] Success: Statement parsed cleanly.
+Statement number: 45
+Identifying statement:		  select name,ssn from prof,st where name=pname and gpa=3.0
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [ssn] 
-  From Table: [prof]
-Warning: Trailing unexpected tokens left over.
-46Identifying statement:
- 		 select name,ssn from prof,st where name=pname or gpa=2.0
+  From Tables: [prof] [st] 
+  Condition: [name] [op:=] [pname]   Logic: [and]   Condition: [gpa] [op:=] [3.0] Success: Statement parsed cleanly.
+Statement number: 46
+Identifying statement:		 select name,ssn from prof,st where name=pname or gpa=2.0
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [ssn] 
-  From Table: [prof]
-Warning: Trailing unexpected tokens left over.
-47Identifying statement:
- 		 select name,ssn from prof,st where name=pname and pname="C" and gpa=3.0
+  From Tables: [prof] [st] 
+  Condition: [name] [op:=] [pname]   Logic: [or]   Condition: [gpa] [op:=] [2.0] Success: Statement parsed cleanly.
+Statement number: 47
+Identifying statement:		 select name,ssn from prof,st where name=pname and pname="C" and gpa=3.0
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [ssn] 
-  From Table: [prof]
-Warning: Trailing unexpected tokens left over.
-48Identifying statement:
- 		  select gpa from student where gpa>=3.0 and gpa!=4.44
+  From Tables: [prof] [st] 
+  Condition: [name] [op:=] [pname]   Logic: [and]   Condition: [pname] [op:=] [C]   Logic: [and]   Condition: [gpa] [op:=] [3.0] Success: Statement parsed cleanly.
+Statement number: 48
+Identifying statement:		  select gpa from student where gpa>=3.0 and gpa!=4.44
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [gpa] 
-  From Table: [student]
-Warning: Trailing unexpected tokens left over.
-49Identifying statement:
- 		  select name, gpa from student where id=3 and gpa=3.0 and name="C"
+  From Tables: [student] 
+  Condition: [gpa] [op:>=] [3.0]   Logic: [and]   Condition: [gpa] [op:!=] [4.44] Success: Statement parsed cleanly.
+Statement number: 49
+Identifying statement:		  select name, gpa from student where id=3 and gpa=3.0 and name="C"
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [gpa] 
-  From Table: [student]
-Warning: Trailing unexpected tokens left over.
-50Identifying statement:
- 		 select name, gpa from student where id!=3 and gpa=3.0 and name="C"
+  From Tables: [student] 
+  Condition: [id] [op:=] [3]   Logic: [and]   Condition: [gpa] [op:=] [3.0]   Logic: [and]   Condition: [name] [op:=] [C] Success: Statement parsed cleanly.
+Statement number: 50
+Identifying statement:		 select name, gpa from student where id!=3 and gpa=3.0 and name="C"
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [gpa] 
-  From Table: [student]
-Warning: Trailing unexpected tokens left over.
-51Identifying statement:
- 		   create table third (x integer)
+  From Tables: [student] 
+  Condition: [id] [op:!=] [3]   Logic: [and]   Condition: [gpa] [op:=] [3.0]   Logic: [and]   Condition: [name] [op:=] [C] Success: Statement parsed cleanly.
+Statement number: 51
+Identifying statement:		   create table third (x integer)
 		CREATE statement identified
-52Identifying statement:
- 		  insert  third values(1)
+[table] [third] 
+Syntax Error: Expected table name near '('
+Statement number: 52
+Identifying statement:		  insert  third values(1)
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'third'
-53Identifying statement:
- 		  insert   third values(2)
+Statement number: 53
+Identifying statement:		  insert   third values(2)
 		INSERT statement identified
-Parsing INSERT INTO statement:
 Syntax Error: Expected INTO after INSERT near 'third'
-54Identifying statement:
- 		    select name, ssn, x from third, st, prof where name=pname and id=x
+Statement number: 54
+Identifying statement:		    select name, ssn, x from third, st, prof where name=pname and id=x
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [ssn] [x] 
-  From Table: [third]
-Warning: Trailing unexpected tokens left over.
-55Identifying statement:
- 		  delete st where name="Abe"
+  From Tables: [third] [st] [prof] 
+  Condition: [name] [op:=] [pname]   Logic: [and]   Condition: [id] [op:=] [x] Success: Statement parsed cleanly.
+Statement number: 55
+Identifying statement:		  delete st where name="Abe"
 		DELETE statement identified
-56Identifying statement:
- 		  delete prof where ssn>=33
+Statement number: 56
+Identifying statement:		  delete prof where ssn>=33
 		DELETE statement identified
-57Identifying statement:
- 		  select ssn from prof
+Statement number: 57
+Identifying statement:		  select ssn from prof
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [ssn] 
-  From Table: [prof]
+  From Tables: [prof] 
 Success: Statement parsed cleanly.
-58Identifying statement:
- 		  select name, gpa, ssn from st,prof where pname=name
+Statement number: 58
+Identifying statement:		  select name, gpa, ssn from st,prof where pname=name
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [gpa] [ssn] 
-  From Table: [st]
-Warning: Trailing unexpected tokens left over.
-59Identifying statement:
- 		   describe prof
+  From Tables: [st] [prof] 
+  Condition: [pname] [op:=] [name] Success: Statement parsed cleanly.
+Statement number: 59
+Identifying statement:		   describe prof
 		DESCRIBE statement identified
-60Identifying statement:
- 		  describe all
+Statement number: 60
+Identifying statement:		  describe all
 		DESCRIBE statement identified
-61Identifying statement:
- 		  update st set gpa=0.00, name="X" where gpa != 4.0
+Statement number: 61
+Identifying statement:		  update st set gpa=0.00, name="X" where gpa != 4.0
 		UPDATE statement identified
-62Identifying statement:
- 		  select name, gpa from student
+Statement number: 62
+Identifying statement:		  select name, gpa from student
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [gpa] 
-  From Table: [student]
+  From Tables: [student] 
 Success: Statement parsed cleanly.
-63Identifying statement:
- 		  update st set name="abc", gpa=1.1 where id=1
+Statement number: 63
+Identifying statement:		  update st set name="abc", gpa=1.1 where id=1
 		UPDATE statement identified
-64Identifying statement:
- 		    update st set name="abc",id=2, gpa=3.0 where id < gpa
+Statement number: 64
+Identifying statement:		    update st set name="abc",id=2, gpa=3.0 where id < gpa
 		UPDATE statement identified
-65Identifying statement:
- 		   Select name, gpa, id from st
+Statement number: 65
+Identifying statement:		   Select name, gpa, id from st
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [name] [gpa] [id] 
-  From Table: [st]
+  From Tables: [st] 
 Success: Statement parsed cleanly.
-66Identifying statement:
- 		   rename st (x,y,z)
+Statement number: 66
+Identifying statement:		   rename st (x,y,z)
 		RENAME statement identified
-67Identifying statement:
- 		 select y, z from st
+Statement number: 67
+Identifying statement:		 select y, z from st
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [y] [z] 
-  From Table: [st]
+  From Tables: [st] 
 Success: Statement parsed cleanly.
-68Identifying statement:
- 		  describe st
+Statement number: 68
+Identifying statement:		  describe st
 		DESCRIBE statement identified
-69Identifying statement:
- 		   Select max(gpa) from st
+Statement number: 69
+Identifying statement:		   Select max(gpa) from st
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [max(gpa)] 
-  From Table: [st]
+  From Tables: [st] 
 Success: Statement parsed cleanly.
-70Identifying statement:
- 		 Select min(gpa) from st where id>2 and name="John Doe"
+Statement number: 70
+Identifying statement:		 Select min(gpa) from st where id>2 and name="John Doe"
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [min(gpa)] 
-  From Table: [st]
-Warning: Trailing unexpected tokens left over.
-71Identifying statement:
- 		 Select average(gpa) from st where id>2
+  From Tables: [st] 
+  Condition: [id] [op:>] [2]   Logic: [and]   Condition: [name] [op:=] [John Doe] Success: Statement parsed cleanly.
+Statement number: 71
+Identifying statement:		 Select average(gpa) from st where id>2
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [average(gpa)] 
-  From Table: [st]
-Warning: Trailing unexpected tokens left over.
-72Identifying statement:
- 		 Select count(*) from st where id>2 or name="John Doe"
+  From Tables: [st] 
+  Condition: [id] [op:>] [2] Success: Statement parsed cleanly.
+Statement number: 72
+Identifying statement:		 Select count(*) from st where id>2 or name="John Doe"
 		SELECT statement identified
 Parsing SELECT statement:
   Columns: [count(*)] 
-  From Table: [st]
-Warning: Trailing unexpected tokens left over.
-73Identifying statement:
- 		   exit
+  From Tables: [st] 
+  Condition: [id] [op:>] [2]   Logic: [or]   Condition: [name] [op:=] [John Doe] Success: Statement parsed cleanly.
+Statement number: 73
+Identifying statement:		   exit
 		EXIT statement identified
-74Identifying statement:
- 		 
+Statement number: 74
+Identifying statement:		 
 Empty statement
