@@ -1,9 +1,9 @@
 Database Project tldairy dnguye24
 =====================================================
-Number of statements: 74
+Number of statements: 38
 
 Statement number: 1
-Identifying statement:create database university
+Identifying statement:CREATE DATABASE university
 Statement identified:  CREATE
   Creating Database(s):[university] 
 
@@ -13,517 +13,245 @@ Statement identified:  USE
 Using Database: [university]
 
 Statement number: 3
-Identifying statement:  create table x(id integer , name text)
-Statement identified:  CREATE
-Parsing CREATE TABLE statement:
-  Table Name: [x]
-  Column Name: [id] Type: [integer]
-  Column Name: [name] Type: [text]
+Identifying statement:  USE university 
+Statement identified:  USE
+Using Database: [university]
 
 Statement number: 4
-Identifying statement:  create table student(a  text )
+Identifying statement:  create table student (id integer primary key, name text, gpa float)
 Statement identified:  CREATE
 Parsing CREATE TABLE statement:
   Table Name: [student]
-  Column Name: [a] Type: [text]
+  Column Name: [id] Type: [integer]
+  PRIMARY KEY designation found for column.
+  Column Name: [name] Type: [text]
+  Column Name: [gpa] Type: [float]
 
 Statement number: 5
-Identifying statement:  select x,y,z  from student  where x=y or y!=z
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [x] [y] [z] 
-  From Tables: [student] 
-  Condition: [x] [op:=] [y] 
-  Logic: [or]   Condition: [y] [op:!=] [z] 
-  Success: Statement parsed cleanly.
+Identifying statement:  CREATE TABLE employee(ssn integer primary key,name text,salary float)
+Statement identified:  CREATE
+Parsing CREATE TABLE statement:
+  Table Name: [employee]
+  Column Name: [ssn] Type: [integer]
+  PRIMARY KEY designation found for column.
+  Column Name: [name] Type: [text]
+  Column Name: [salary] Type: [float]
 
 Statement number: 6
-Identifying statement:  describe student
-Statement identified:  DESCRIBE
-  Table Name: [student]
-Describing Table: [EOF]
+Identifying statement:  create table course ( cid integer, title text, credits integer ) 
+Statement identified:  CREATE
+Parsing CREATE TABLE statement:
+  Table Name: [course]
+  Column Name: [cid] Type: [integer]
+  Column Name: [title] Type: [text]
+  Column Name: [credits] Type: [integer]
 
 Statement number: 7
-Identifying statement:  let x select id,name from student
-Statement identified:  LET
-Storing under table name: [x]
-Syntax Error: Expected KEY after variable name in LET statement near 'select'
+Identifying statement:  DESCRIBE student
+Statement identified:  DESCRIBE
+  Table Name: [student]
 
 Statement number: 8
-Identifying statement:  rename x(a,b,c)  
-Statement identified:  RENAME
-  Old Table Name: [x]
-  New Attribute of Table Name: [a]
-  New Attribute of Table Name: [b]
-  New Attribute of Table Name: [c]
-Success: Statement parsed cleanly.
+Identifying statement:  describe ALL
+Statement identified:  DESCRIBE
+  Table Name: [ALL]
 
 Statement number: 9
-Identifying statement:  insert  student values("abc","x","aaa",1,2,"yy"  )  
-Statement identified:  INSERT
-  Target Table: [student]
-  Values Inserted: ["abc"] ["x"] ["aaa"] [1] [2] ["yy"] 
-Success: Statement parsed cleanly.
+Identifying statement:  DESCRIBE
+Statement identified:  DESCRIBE
+Syntax Error: Expected table name after DESCRIBE near 'EOF'
 
 Statement number: 10
-Identifying statement:  insert  student values("abc","x","aaa",1,2.345,"yy")
-Statement identified:  INSERT
-  Target Table: [student]
-  Values Inserted: ["abc"] ["x"] ["aaa"] [1] [2.345] ["yy"] 
+Identifying statement:  RENAME student (studentid, fullname, gradepointaverage)
+Statement identified:  RENAME
+  Old Table Name: [student]
+  New Attribute of Table Name: [studentid]
+  New Attribute of Table Name: [fullname]
+  New Attribute of Table Name: [gradepointaverage]
 Success: Statement parsed cleanly.
 
 Statement number: 11
-Identifying statement:  update student set x="abc",y=1,z="dd"  
-Statement identified:  UPDATE
+Identifying statement:  rename employee(empid,fullname,pay)
+Statement identified:  RENAME
+  Old Table Name: [employee]
+  New Attribute of Table Name: [empid]
+  New Attribute of Table Name: [fullname]
+  New Attribute of Table Name: [pay]
+Success: Statement parsed cleanly.
 
 Statement number: 12
-Identifying statement:  update student set x="abc",y=1,z="dd" where a<=b  
-Statement identified:  UPDATE
+Identifying statement:  RENAME course (cid)
+Statement identified:  RENAME
+  Old Table Name: [course]
+  New Attribute of Table Name: [cid]
+Success: Statement parsed cleanly.
 
 Statement number: 13
-Identifying statement:  update student set x="abc",y=1,z="dd" where a>c or  b=d  
-Statement identified:  UPDATE
+Identifying statement:  insert student values (123, "John Doe", 3.5)
+Statement identified:  INSERT
+  Target Table: [student]
+  Values Inserted: [123] ["John Doe"] [3.5] 
+Success: Statement parsed cleanly.
 
 Statement number: 14
-Identifying statement:  update student set x="abc",y=1,z="dd"  
-Statement identified:  UPDATE
+Identifying statement:  INSERT employee VALUES(111222333,"Alice Brown",55000.00)
+Statement identified:  INSERT
+  Target Table: [employee]
+  Values Inserted: [111222333] ["Alice Brown"] [55000.00] 
+Success: Statement parsed cleanly.
 
 Statement number: 15
-Identifying statement:    delete  student  
-Statement identified:  DELETE
+Identifying statement:  insert course values (10, "Databases", 3, "extra")
+Statement identified:  INSERT
+  Target Table: [course]
+  Values Inserted: [10] ["Databases"] [3] ["extra"] 
+Success: Statement parsed cleanly.
 
 Statement number: 16
-Identifying statement:    delete  x
-Statement identified:  DELETE
+Identifying statement:  UPDATE student SET gpa = 3.9 WHERE id=123
+Statement identified:  UPDATE
+  Target Table: [student]
+  AttrName: [gpa] [op:=]   New Value: [3.9]   Condition: [id] [op:=] [123] 
 
 Statement number: 17
-Identifying statement:    use y
-Statement identified:  USE
-Using Database: [y]
+Identifying statement:  update employee set salary=60000.5, name="Bob Carter" where ssn=111222444
+Statement identified:  UPDATE
+  Target Table: [employee]
+  AttrName: [salary] [op:=]   New Value: [60000.5] 
+Syntax Error: Expected attribute name in UPDATE statement near ','
 
 Statement number: 18
-Identifying statement:    Create student
-Statement identified:  CREATE
-Syntax Error: Expected TABLE after CREATE near 'student'
+Identifying statement:  UPDATE student SET WHERE id=123
+Statement identified:  UPDATE
+  Target Table: [student]
+  Condition: [id] [op:=] [123] 
 
 Statement number: 19
-Identifying statement:  select from student
+Identifying statement:  SELECT id, name FROM student WHERE gpa>3.0
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [id] [name] 
+  From Tables: [student] 
+  Condition: [gpa] [op:>] [3.0] 
+  Success: Statement parsed cleanly.
+
+Statement number: 20
+Identifying statement:  select id,name,gpa from student where gpa>3.0 and id<126
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [id] [name] [gpa] 
+  From Tables: [student] 
+  Condition: [gpa] [op:>] [3.0] 
+  Logic: [and]   Condition: [id] [op:<] [126] 
+  Success: Statement parsed cleanly.
+
+Statement number: 21
+Identifying statement:  select count(*) from student
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [count(*)] 
+  From Tables: [student] 
+  Success: Statement parsed cleanly.
+
+Statement number: 22
+Identifying statement:  select max(gpa) from student
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [max(gpa)] 
+  From Tables: [student] 
+  Success: Statement parsed cleanly.
+
+Statement number: 23
+Identifying statement:  select min (gpa) from student
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [min(gpa)] 
+  From Tables: [student] 
+  Success: Statement parsed cleanly.
+
+Statement number: 24
+Identifying statement:  SELECT Average(gpa) FROM student WHERE gpa>0
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [Average(gpa)] 
+  From Tables: [student] 
+  Condition: [gpa] [op:>] [0] 
+  Success: Statement parsed cleanly.
+
+Statement number: 25
+Identifying statement:  select from student where id=123
 Statement identified:  SELECT
 Parsing SELECT statement:
   Columns: 
 Syntax Error: Expected column name, '*' or aggregate function near 'from'
 
-Statement number: 20
-Identifying statement:  select student
+Statement number: 26
+Identifying statement:  select id name from student where id=123
 Statement identified:  SELECT
 Parsing SELECT statement:
-  Columns: [student] 
-Syntax Error: Missing FROM clause near 'EOF'
-
-Statement number: 21
-Identifying statement:  create table student()
-Statement identified:  CREATE
-Parsing CREATE TABLE statement:
-  Table Name: [student]
-
-Statement number: 22
-Identifying statement:  create table student(id,id)
-Statement identified:  CREATE
-Parsing CREATE TABLE statement:
-  Table Name: [student]
-  Column Name: [id] 
-Syntax Error: Expected column type after column name near ','
-
-Statement number: 23
-Identifying statement:  use
-Statement identified:  USE
-Syntax Error: Expected database name after USE near 'EOF'
-
-Statement number: 24
-Identifying statement:  rename student)
-Statement identified:  RENAME
-  Old Table Name: [student]
-Syntax Error: Trailing unexpected tokens left over.
-  Remaining tokens: [)] 
-
-Statement number: 25
-Identifying statement:  create database db3
-Statement identified:  CREATE
-  Creating Database(s):[db3] 
-
-Statement number: 26
-Identifying statement:    use db3
-Statement identified:  USE
-Using Database: [db3]
+  Columns: [id] 
+Syntax Error: Missing FROM clause near 'name'
 
 Statement number: 27
-Identifying statement:  create table st(id integer primary key, name text, gpa float)
-Statement identified:  CREATE
-Parsing CREATE TABLE statement:
-  Table Name: [st]
-  Column Name: [id] Type: [integer]
-  Column Name: [primary] 
-Syntax Error: Expected column type after column name near 'key'
+Identifying statement:  LET honorRoll KEY id SELECT id, name, gpa FROM student WHERE gpa>=3.5
+Statement identified:  LET
+Storing under table name: [honorRoll]
+Attribute Column Name: [id]
+Parsing SELECT statement:
+  Columns: [id] [name] [gpa] 
+  From Tables: [student] 
+  Condition: [gpa] [op:>=] [3.5] 
+  Success: Statement parsed cleanly.
 
 Statement number: 28
-Identifying statement:  create table prof  (pname text   ,  ssn integer)
-Statement identified:  CREATE
-Parsing CREATE TABLE statement:
-  Table Name: [prof]
-  Column Name: [pname] Type: [text]
-  Column Name: [ssn] Type: [integer]
+Identifying statement:  LET honorRoll KEY id SELECT id, name FROM student WHERE gpa>=3.5
+Statement identified:  LET
+Storing under table name: [honorRoll]
+Attribute Column Name: [id]
+Parsing SELECT statement:
+  Columns: [id] [name] 
+  From Tables: [student] 
+  Condition: [gpa] [op:>=] [3.5] 
+  Success: Statement parsed cleanly.
 
 Statement number: 29
-Identifying statement: insert  st values (3, "C", 3.0)
-Statement identified:  INSERT
-  Target Table: [st]
-  Values Inserted: [3] ["C"] [3.0] 
-Success: Statement parsed cleanly.
+Identifying statement:  LET honorRoll SELECT id FROM student
+Statement identified:  LET
+Storing under table name: [honorRoll]
+Syntax Error: Expected KEY after variable name in LET statement near 'SELECT'
 
 Statement number: 30
-Identifying statement: insert  st values (2, "B", 2.0)
-Statement identified:  INSERT
-  Target Table: [st]
-  Values Inserted: [2] ["B"] [2.0] 
-Success: Statement parsed cleanly.
+Identifying statement:  DELETE student WHERE id=125
+Statement identified:  DELETE
 
 Statement number: 31
-Identifying statement:   insert  st values (  1, "Abe", 3.5)
-Statement identified:  INSERT
-  Target Table: [st]
-  Values Inserted: [1] ["Abe"] [3.5] 
-Success: Statement parsed cleanly.
+Identifying statement:  delete employee
+Statement identified:  DELETE
 
 Statement number: 32
-Identifying statement: insert  st values (2, "Berror", 2.0)
-Statement identified:  INSERT
-  Target Table: [st]
-  Values Inserted: [2] ["Berror"] [2.0] 
-Success: Statement parsed cleanly.
+Identifying statement:  DELETE FROM student WHERE id=126
+Statement identified:  DELETE
 
 Statement number: 33
-Identifying statement:  insert  st values (5, "E", 5)
-Statement identified:  INSERT
-  Target Table: [st]
-  Values Inserted: [5] ["E"] [5] 
-Success: Statement parsed cleanly.
+Identifying statement:  INPUT a.dat
+Statement identified:  INPUT
 
 Statement number: 34
-Identifying statement: insert  st values (4, "D", 4.44)
-Statement identified:  INSERT
-  Target Table: [st]
-  Values Inserted: [4] ["D"] [4.44] 
-Success: Statement parsed cleanly.
+Identifying statement:  input a.dat output b.dat
+Statement identified:  INPUT
 
 Statement number: 35
-Identifying statement:  insert  st values (6, "F", 6.0)
-Statement identified:  INSERT
-  Target Table: [st]
-  Values Inserted: [6] ["F"] [6.0] 
-Success: Statement parsed cleanly.
+Identifying statement:  INPUT OUTPUT b.dat
+Statement identified:  INPUT
 
 Statement number: 36
-Identifying statement:    insert  st values (4, "Derror", 2.0)
-Statement identified:  INSERT
-  Target Table: [st]
-  Values Inserted: [4] ["Derror"] [2.0] 
-Success: Statement parsed cleanly.
-
-Statement number: 37
-Identifying statement:   insert  prof values ("ABE", 11)
-Statement identified:  INSERT
-  Target Table: [prof]
-  Values Inserted: ["ABE"] [11] 
-Success: Statement parsed cleanly.
-
-Statement number: 38
-Identifying statement:  insert  prof values ("C", 33)
-Statement identified:  INSERT
-  Target Table: [prof]
-  Values Inserted: ["C"] [33] 
-Success: Statement parsed cleanly.
-
-Statement number: 39
-Identifying statement:   let st2 KEY ssn select name, gpa, ssn from st,prof where pname=name or gpa=3.0
-Statement identified:  LET
-Storing under table name: [st2]
-Attribute Column Name: [ssn]
-Parsing SELECT statement:
-  Columns: [name] [gpa] [ssn] 
-  From Tables: [st] [prof] 
-  Condition: [pname] [op:=] [name] 
-  Logic: [or]   Condition: [gpa] [op:=] [3.0] 
-  Success: Statement parsed cleanly.
-
-Statement number: 40
-Identifying statement:  select name, gpa, ssn from st2
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [gpa] [ssn] 
-  From Tables: [st2] 
-  Success: Statement parsed cleanly.
-
-Statement number: 41
-Identifying statement:  select name, gpa, ssn from st2 where ssn=2
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [gpa] [ssn] 
-  From Tables: [st2] 
-  Condition: [ssn] [op:=] [2] 
-  Success: Statement parsed cleanly.
-
-Statement number: 42
-Identifying statement:  select name, gpa, ssn from st2 where ssn=2 and gpa=3.0
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [gpa] [ssn] 
-  From Tables: [st2] 
-  Condition: [ssn] [op:=] [2] 
-  Logic: [and]   Condition: [gpa] [op:=] [3.0] 
-  Success: Statement parsed cleanly.
-
-Statement number: 43
-Identifying statement: select name, gpa, ssn from st2 where ssn=2 and gpa!=3.0
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [gpa] [ssn] 
-  From Tables: [st2] 
-  Condition: [ssn] [op:=] [2] 
-  Logic: [and]   Condition: [gpa] [op:!=] [3.0] 
-  Success: Statement parsed cleanly.
-
-Statement number: 44
-Identifying statement:    select name, gpa, ssn from st,prof where pname=name
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [gpa] [ssn] 
-  From Tables: [st] [prof] 
-  Condition: [pname] [op:=] [name] 
-  Success: Statement parsed cleanly.
-
-Statement number: 45
-Identifying statement:  select name,ssn from prof,st where name=pname and gpa=3.0
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [ssn] 
-  From Tables: [prof] [st] 
-  Condition: [name] [op:=] [pname] 
-  Logic: [and]   Condition: [gpa] [op:=] [3.0] 
-  Success: Statement parsed cleanly.
-
-Statement number: 46
-Identifying statement: select name,ssn from prof,st where name=pname or gpa=2.0
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [ssn] 
-  From Tables: [prof] [st] 
-  Condition: [name] [op:=] [pname] 
-  Logic: [or]   Condition: [gpa] [op:=] [2.0] 
-  Success: Statement parsed cleanly.
-
-Statement number: 47
-Identifying statement: select name,ssn from prof,st where name=pname and pname="C" and gpa=3.0
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [ssn] 
-  From Tables: [prof] [st] 
-  Condition: [name] [op:=] [pname] 
-  Logic: [and]   Condition: [pname] [op:=] [C] 
-  Logic: [and]   Condition: [gpa] [op:=] [3.0] 
-  Success: Statement parsed cleanly.
-
-Statement number: 48
-Identifying statement:  select gpa from student where gpa>=3.0 and gpa!=4.44
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [gpa] 
-  From Tables: [student] 
-  Condition: [gpa] [op:>=] [3.0] 
-  Logic: [and]   Condition: [gpa] [op:!=] [4.44] 
-  Success: Statement parsed cleanly.
-
-Statement number: 49
-Identifying statement:  select name, gpa from student where id=3 and gpa=3.0 and name="C"
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [gpa] 
-  From Tables: [student] 
-  Condition: [id] [op:=] [3] 
-  Logic: [and]   Condition: [gpa] [op:=] [3.0] 
-  Logic: [and]   Condition: [name] [op:=] [C] 
-  Success: Statement parsed cleanly.
-
-Statement number: 50
-Identifying statement: select name, gpa from student where id!=3 and gpa=3.0 and name="C"
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [gpa] 
-  From Tables: [student] 
-  Condition: [id] [op:!=] [3] 
-  Logic: [and]   Condition: [gpa] [op:=] [3.0] 
-  Logic: [and]   Condition: [name] [op:=] [C] 
-  Success: Statement parsed cleanly.
-
-Statement number: 51
-Identifying statement:   create table third (x integer)
-Statement identified:  CREATE
-Parsing CREATE TABLE statement:
-  Table Name: [third]
-  Column Name: [x] Type: [integer]
-
-Statement number: 52
-Identifying statement:  insert  third values(1)
-Statement identified:  INSERT
-  Target Table: [third]
-  Values Inserted: [1] 
-Success: Statement parsed cleanly.
-
-Statement number: 53
-Identifying statement:  insert   third values(2)
-Statement identified:  INSERT
-  Target Table: [third]
-  Values Inserted: [2] 
-Success: Statement parsed cleanly.
-
-Statement number: 54
-Identifying statement:    select name, ssn, x from third, st, prof where name=pname and id=x
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [ssn] [x] 
-  From Tables: [third] [st] [prof] 
-  Condition: [name] [op:=] [pname] 
-  Logic: [and]   Condition: [id] [op:=] [x] 
-  Success: Statement parsed cleanly.
-
-Statement number: 55
-Identifying statement:  delete st where name="Abe"
-Statement identified:  DELETE
-
-Statement number: 56
-Identifying statement:  delete prof where ssn>=33
-Statement identified:  DELETE
-
-Statement number: 57
-Identifying statement:  select ssn from prof
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [ssn] 
-  From Tables: [prof] 
-  Success: Statement parsed cleanly.
-
-Statement number: 58
-Identifying statement:  select name, gpa, ssn from st,prof where pname=name
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [gpa] [ssn] 
-  From Tables: [st] [prof] 
-  Condition: [pname] [op:=] [name] 
-  Success: Statement parsed cleanly.
-
-Statement number: 59
-Identifying statement:   describe prof
-Statement identified:  DESCRIBE
-  Table Name: [prof]
-Describing Table: [EOF]
-
-Statement number: 60
-Identifying statement:  describe all
-Statement identified:  DESCRIBE
-  Table Name: [all]
-Describing Table: [EOF]
-
-Statement number: 61
-Identifying statement:  update st set gpa=0.00, name="X" where gpa != 4.0
-Statement identified:  UPDATE
-
-Statement number: 62
-Identifying statement:  select name, gpa from student
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [gpa] 
-  From Tables: [student] 
-  Success: Statement parsed cleanly.
-
-Statement number: 63
-Identifying statement:  update st set name="abc", gpa=1.1 where id=1
-Statement identified:  UPDATE
-
-Statement number: 64
-Identifying statement:    update st set name="abc",id=2, gpa=3.0 where id < gpa
-Statement identified:  UPDATE
-
-Statement number: 65
-Identifying statement:   Select name, gpa, id from st
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [name] [gpa] [id] 
-  From Tables: [st] 
-  Success: Statement parsed cleanly.
-
-Statement number: 66
-Identifying statement:   rename st (x,y,z)
-Statement identified:  RENAME
-  Old Table Name: [st]
-  New Attribute of Table Name: [x]
-  New Attribute of Table Name: [y]
-  New Attribute of Table Name: [z]
-Success: Statement parsed cleanly.
-
-Statement number: 67
-Identifying statement: select y, z from st
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [y] [z] 
-  From Tables: [st] 
-  Success: Statement parsed cleanly.
-
-Statement number: 68
-Identifying statement:  describe st
-Statement identified:  DESCRIBE
-  Table Name: [st]
-Describing Table: [EOF]
-
-Statement number: 69
-Identifying statement:   Select max(gpa) from st
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [max(gpa)] 
-  From Tables: [st] 
-  Success: Statement parsed cleanly.
-
-Statement number: 70
-Identifying statement: Select min(gpa) from st where id>2 and name="John Doe"
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [min(gpa)] 
-  From Tables: [st] 
-  Condition: [id] [op:>] [2] 
-  Logic: [and]   Condition: [name] [op:=] [John Doe] 
-  Success: Statement parsed cleanly.
-
-Statement number: 71
-Identifying statement: Select average(gpa) from st where id>2
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [average(gpa)] 
-  From Tables: [st] 
-  Condition: [id] [op:>] [2] 
-  Success: Statement parsed cleanly.
-
-Statement number: 72
-Identifying statement: Select count(*) from st where id>2 or name="John Doe"
-Statement identified:  SELECT
-Parsing SELECT statement:
-  Columns: [count(*)] 
-  From Tables: [st] 
-  Condition: [id] [op:>] [2] 
-  Logic: [or]   Condition: [name] [op:=] [John Doe] 
-  Success: Statement parsed cleanly.
-
-Statement number: 73
-Identifying statement:   exit
+Identifying statement:  EXIT
 Statement identified:  EXIT
 
-Statement number: 74
+Statement number: 37
+Identifying statement:  exit  exit
+Statement identified:  EXIT
+
+Statement number: 38
 Identifying statement: 
 Empty statement

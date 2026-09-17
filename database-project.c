@@ -575,11 +575,45 @@ void parse_create_table (ParserState* state) {
     }
     advance(state); // Consume '('
 
+    // Parse first column and domain. To check for optional primary key designation.
+
+    if (state->current_token.type == TOKEN_IDENTIFIER) {
+        printf("  Column Name: [%s] ", state->current_token.text);
+        advance(state); // Consume column name
+
+        if (state->current_token.type == TOKEN_TEXT || state->current_token.type == TOKEN_INTEGER || state->current_token.type == TOKEN_FLOAT) {
+            printf("Type: [%s]\n", state->current_token.text);
+            advance(state); // Consume column type
+        } else {
+            printf("\nSyntax Error: Expected column type after column name near '%s'\n", state->current_token.text);
+            return;
+        }
+    } else {
+        printf("\nSyntax Error: Expected column definition near '%s'\n", state->current_token.text);
+        return;
+    }
+
+    if (strcasecmp(state->current_token.text, "PRIMARY") == 0) {
+        advance(state); // Consume PRIMARY
+        if (strcasecmp(state->current_token.text, "KEY") == 0) {
+            advance(state); // Consume KEY
+            printf("  PRIMARY KEY designation found for column.\n");
+            advance(state); //Consume COMMA
+        } else {
+            printf("\nSyntax Error: Expected KEY after PRIMARY near '%s'\n", state->current_token.text);
+            return;
+        }
+    } else if (state->current_token.type == TOKEN_COMMA || state->current_token.type == TOKEN_RPAREN) {
+        advance(state); // Consume COMMA or RPAREN
+    } else {
+        printf("\nSyntax Error: Expected PRIMARY KEY or COMMA after column definition near '%s'\n", state->current_token.text);
+        return;
+    }
+
     while (state->current_token.type != TOKEN_RPAREN && state->current_token.type != TOKEN_EOF) {
         if (state->current_token.type == TOKEN_IDENTIFIER) {
             printf("  Column Name: [%s] ", state->current_token.text);
             advance(state); // Consume column name
-
             if (state->current_token.type == TOKEN_TEXT || state->current_token.type == TOKEN_INTEGER || state->current_token.type == TOKEN_FLOAT) {
                 printf("Type: [%s]\n", state->current_token.text);
                 advance(state); // Consume column type
@@ -587,7 +621,6 @@ void parse_create_table (ParserState* state) {
                 printf("\nSyntax Error: Expected column type after column name near '%s'\n", state->current_token.text);
                 return;
             }
-
             if (state->current_token.type == TOKEN_COMMA) {
                 advance(state); // Consume comma and continue with more columns
             }
@@ -596,6 +629,7 @@ void parse_create_table (ParserState* state) {
             return;
         }
     }
+    
 }
 
 void parse_create (ParserState* state) {
@@ -743,7 +777,57 @@ void parse_rename (ParserState* state) {
         }
         printf("\n");
     }
+}
 
+void parse_update (ParserState* state) {
+    if (state->current_token.type != TOKEN_UPDATE) {
+        printf("Syntax Error: Expected UPDATE near '%s'\n", state->current_token.text);
+        return;
+    }
+    advance(state); // Consume UPDATE
+
+    if (state->current_token.type != TOKEN_IDENTIFIER) {
+        printf("Syntax Error: Expected table name after UPDATE near '%s'\n", state->current_token.text);
+        return;
+    }
+
+    printf("  Target Table: [%s]\n", state->current_token.text);
+    advance(state); // Consume table name
+
+    if (strcasecmp(state->current_token.text, "SET") == 0) {
+        advance(state); // Consume SET
+    } else {
+        printf("Syntax Error: Expected 'SET' after column name in UPDATE statement near '%s'\n", state->current_token.text);
+        return;
+    }
+
+    while (state->current_token.type != TOKEN_EOF && state->current_token.type != TOKEN_WHERE) {
+        if (state->current_token.type == TOKEN_IDENTIFIER) {
+            printf("  AttrName: [%s] ", state->current_token.text);
+            advance(state); // Consume attribute name
+        } else {
+            printf("\nSyntax Error: Expected attribute name in UPDATE statement near '%s'\n", state->current_token.text);
+            return;
+        }
+
+        if (state->current_token.type != TOKEN_EQUAL) {
+            printf("\nSyntax Error: Expected '=' after attribute name in UPDATE statement near '%s'\n", state->current_token.text);
+            return;
+        }
+        printf("[op:%s] ", state->current_token.text);
+        advance(state); // Consume '='
+
+        if (state->current_token.type == TOKEN_STRING || state->current_token.type == TOKEN_NUMBER || state->current_token.type == TOKEN_IDENTIFIER) {
+            printf("  New Value: [%s] ", state->current_token.text);
+            advance(state); // Consume new value
+        } else {
+            printf("\nSyntax Error: Expected value after '=' in UPDATE statement near '%s'\n", state->current_token.text);
+            return;
+        }
+    }
+    if (state->current_token.type == TOKEN_WHERE) {
+        parse_where(state);
+    }
 }
 
 void statement_identifier(char *statement) {
@@ -794,8 +878,8 @@ void statement_identifier(char *statement) {
         parse_insert(&state);
     } else if (strcmp(lower_command, "update") == 0) {
         printf("Statement identified:  UPDATE\n");
-        // advance(&state);
-        // parse_update(&state);
+        advance(&state);
+        parse_update(&state);
     } else if (strcmp(lower_command, "delete") == 0) {
         printf("Statement identified:  DELETE\n");
     } else if (strcmp(lower_command, "rename") == 0) {
@@ -806,7 +890,10 @@ void statement_identifier(char *statement) {
         printf("Statement identified:  INPUT\n");
     } else if (strcmp(lower_command, "exit") == 0) {
         printf("Statement identified:  EXIT\n");
-    } else {
+    } else if (strcmp(lower_command, "--") == 0) {
+        printf("Skipping comment\n");
+    }
+    else {
         printf("Unknown statement type: %s\n", command);
     }
 }

@@ -1,0 +1,86 @@
+-- Test input for DBMS project;
+-- Exercises: CREATE DATABASE, USE, CREATE TABLE, DESCRIBE, INSERT,;
+-- UPDATE, SELECT (with WHERE, and/or), aggregates (count/min/max/average),;
+-- LET, RENAME, DELETE, case-insensitivity, and int/float equality.;
+
+CREATE DATABASE university;
+use
+university
+;
+
+-- ---- Table creation (primary key -> BST index) ----;
+create table student (id integer primary key, name text, gpa float);
+CREATE TABLE employee (ssn integer primary key, name text, salary float);
+
+DESCRIBE ALL;
+
+-- ---- Inserts (test domain/key/entity-integrity constraints) ----;
+insert student values (123, "John Doe", 3.5);
+insert student values (124, "Jane Smith", 3.8);
+insert student values (125, "John Doe", 2.9);
+insert student values (126, "Amy Chen", 4.0);
+-- duplicate primary key, should be rejected;
+insert student values (123, "Dup Key", 1.0);
+
+insert employee values (111222333, "Alice Brown", 55000.00);
+insert employee values (111222444, "Bob Carter", 62000.5);
+insert employee values (111222555, "Cara Diaz", 62000.5);
+
+DESCRIBE student;
+DESCRIBE employee;
+
+-- ---- Primary key lookup (must use BST index) ----;
+select name, gpa from student where id=123;
+
+-- ---- Non-key lookup (must use in-order BST traversal) ----;
+SELECT id, name FROM student WHERE name="John Doe";
+
+-- ---- Case-insensitive string comparison ----;
+select id from student where name="john doe";
+
+-- ---- Int/float equality ----;
+select name from student where gpa=4.0;
+
+-- ---- Compound condition (and/or) ----;
+select id, name, gpa from student where gpa>3.0 and id<126;
+select id, name from student where id=124 or id=126;
+
+-- ---- Update ----;
+UPDATE student SET gpa = 3.9 WHERE id=123;
+select id, gpa from student where id=123;
+
+-- ---- Aggregates (graduate requirement) ----;
+select count(*) from student;
+select max(gpa) from student;
+select min(gpa) from student;
+select average(gpa) from student where gpa>0;
+
+-- ---- LET (materialize a query result with its own BST) ----;
+LET honorRoll
+KEY id
+SELECT id, name, gpa FROM student WHERE gpa>=3.5;
+
+DESCRIBE honorRoll;
+select id, name from honorRoll where id=124;
+
+-- ---- Rename ----;
+RENAME employee (empid, fullname, pay);
+DESCRIBE employee;
+select fullname, pay from employee where pay>60000;
+
+-- ---- Delete with WHERE ----;
+DELETE student WHERE id=125;
+select id, name from student where name="John Doe";
+
+-- ---- Delete without WHERE (drops table + schema) ----;
+DELETE employee;
+DESCRIBE ALL;
+
+-- ---- Multi-line statement, no WHERE clause ----;
+SELECT
+id, name
+FROM
+student
+;
+
+EXIT;

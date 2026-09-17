@@ -1,0 +1,80 @@
+CREATE DATABASE university;
+
+use university;
+
+USE
+university
+;
+
+create table student (id integer primary key, name text, gpa float);
+
+CREATE TABLE employee(ssn integer primary key,name text,salary float);
+
+create table course ( cid integer, title text, credits integer ) ;
+
+DESCRIBE student;
+
+describe ALL;
+
+DESCRIBE;
+
+RENAME student (studentid, fullname, gradepointaverage);
+
+rename employee(empid,fullname,pay);
+
+RENAME course (cid);
+
+insert student values (123, "John Doe", 3.5);
+
+INSERT employee VALUES(111222333,"Alice Brown",55000.00);
+
+insert course values (10, "Databases", 3, "extra");
+
+UPDATE student SET gpa = 3.9 WHERE id=123;
+
+update employee set salary=60000.5, name="Bob Carter" where ssn=111222444;
+
+UPDATE student SET WHERE id=123;
+
+SELECT id, name FROM student WHERE gpa>3.0;
+
+select id,name,gpa from student where gpa>3.0 and id<126;
+
+select count(*) from student;
+
+select max(gpa) from student;
+
+select min (gpa) from student;
+
+SELECT Average(gpa) FROM student WHERE gpa>0;
+
+select from student where id=123;
+
+select id name from student where id=123;
+
+LET honorRoll KEY id SELECT id, name, gpa FROM student WHERE gpa>=3.5;
+
+LET
+honorRoll
+KEY id
+SELECT id, name FROM student WHERE gpa>=3.5;
+
+LET honorRoll SELECT id FROM student;
+
+DELETE student WHERE id=125;
+
+delete employee;
+
+DELETE FROM student WHERE id=126;
+
+INPUT a.dat;
+
+input a.dat output b.dat;
+
+INPUT OUTPUT b.dat;
+
+EXIT;
+
+exit
+
+exit;;
