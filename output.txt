@@ -40,7 +40,8 @@ Parsing SELECT statement:
 Statement number: 6
 Identifying statement:  describe student
 Statement identified:  DESCRIBE
-Describing Table: [student]
+  Table Name: [student]
+Describing Table: [EOF]
 
 Statement number: 7
 Identifying statement:  let x select id,name from student
@@ -51,16 +52,25 @@ Syntax Error: Expected KEY after variable name in LET statement near 'select'
 Statement number: 8
 Identifying statement:  rename x(a,b,c)  
 Statement identified:  RENAME
+  Old Table Name: [x]
+  New Attribute of Table Name: [a]
+  New Attribute of Table Name: [b]
+  New Attribute of Table Name: [c]
+Success: Statement parsed cleanly.
 
 Statement number: 9
 Identifying statement:  insert  student values("abc","x","aaa",1,2,"yy"  )  
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'student'
+  Target Table: [student]
+  Values Inserted: ["abc"] ["x"] ["aaa"] [1] [2] ["yy"] 
+Success: Statement parsed cleanly.
 
 Statement number: 10
 Identifying statement:  insert  student values("abc","x","aaa",1,2.345,"yy")
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'student'
+  Target Table: [student]
+  Values Inserted: ["abc"] ["x"] ["aaa"] [1] [2.345] ["yy"] 
+Success: Statement parsed cleanly.
 
 Statement number: 11
 Identifying statement:  update student set x="abc",y=1,z="dd"  
@@ -132,6 +142,9 @@ Syntax Error: Expected database name after USE near 'EOF'
 Statement number: 24
 Identifying statement:  rename student)
 Statement identified:  RENAME
+  Old Table Name: [student]
+Syntax Error: Trailing unexpected tokens left over.
+  Remaining tokens: [)] 
 
 Statement number: 25
 Identifying statement:  create database db3
@@ -163,52 +176,72 @@ Parsing CREATE TABLE statement:
 Statement number: 29
 Identifying statement: insert  st values (3, "C", 3.0)
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'st'
+  Target Table: [st]
+  Values Inserted: [3] ["C"] [3.0] 
+Success: Statement parsed cleanly.
 
 Statement number: 30
 Identifying statement: insert  st values (2, "B", 2.0)
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'st'
+  Target Table: [st]
+  Values Inserted: [2] ["B"] [2.0] 
+Success: Statement parsed cleanly.
 
 Statement number: 31
 Identifying statement:   insert  st values (  1, "Abe", 3.5)
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'st'
+  Target Table: [st]
+  Values Inserted: [1] ["Abe"] [3.5] 
+Success: Statement parsed cleanly.
 
 Statement number: 32
 Identifying statement: insert  st values (2, "Berror", 2.0)
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'st'
+  Target Table: [st]
+  Values Inserted: [2] ["Berror"] [2.0] 
+Success: Statement parsed cleanly.
 
 Statement number: 33
 Identifying statement:  insert  st values (5, "E", 5)
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'st'
+  Target Table: [st]
+  Values Inserted: [5] ["E"] [5] 
+Success: Statement parsed cleanly.
 
 Statement number: 34
 Identifying statement: insert  st values (4, "D", 4.44)
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'st'
+  Target Table: [st]
+  Values Inserted: [4] ["D"] [4.44] 
+Success: Statement parsed cleanly.
 
 Statement number: 35
 Identifying statement:  insert  st values (6, "F", 6.0)
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'st'
+  Target Table: [st]
+  Values Inserted: [6] ["F"] [6.0] 
+Success: Statement parsed cleanly.
 
 Statement number: 36
 Identifying statement:    insert  st values (4, "Derror", 2.0)
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'st'
+  Target Table: [st]
+  Values Inserted: [4] ["Derror"] [2.0] 
+Success: Statement parsed cleanly.
 
 Statement number: 37
 Identifying statement:   insert  prof values ("ABE", 11)
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'prof'
+  Target Table: [prof]
+  Values Inserted: ["ABE"] [11] 
+Success: Statement parsed cleanly.
 
 Statement number: 38
 Identifying statement:  insert  prof values ("C", 33)
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'prof'
+  Target Table: [prof]
+  Values Inserted: ["C"] [33] 
+Success: Statement parsed cleanly.
 
 Statement number: 39
 Identifying statement:   let st2 KEY ssn select name, gpa, ssn from st,prof where pname=name or gpa=3.0
@@ -341,12 +374,16 @@ Parsing CREATE TABLE statement:
 Statement number: 52
 Identifying statement:  insert  third values(1)
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'third'
+  Target Table: [third]
+  Values Inserted: [1] 
+Success: Statement parsed cleanly.
 
 Statement number: 53
 Identifying statement:  insert   third values(2)
 Statement identified:  INSERT
-Syntax Error: Expected INTO after INSERT near 'third'
+  Target Table: [third]
+  Values Inserted: [2] 
+Success: Statement parsed cleanly.
 
 Statement number: 54
 Identifying statement:    select name, ssn, x from third, st, prof where name=pname and id=x
@@ -386,12 +423,14 @@ Parsing SELECT statement:
 Statement number: 59
 Identifying statement:   describe prof
 Statement identified:  DESCRIBE
-Describing Table: [prof]
+  Table Name: [prof]
+Describing Table: [EOF]
 
 Statement number: 60
 Identifying statement:  describe all
 Statement identified:  DESCRIBE
-Describing Table: [all]
+  Table Name: [all]
+Describing Table: [EOF]
 
 Statement number: 61
 Identifying statement:  update st set gpa=0.00, name="X" where gpa != 4.0
@@ -424,6 +463,11 @@ Parsing SELECT statement:
 Statement number: 66
 Identifying statement:   rename st (x,y,z)
 Statement identified:  RENAME
+  Old Table Name: [st]
+  New Attribute of Table Name: [x]
+  New Attribute of Table Name: [y]
+  New Attribute of Table Name: [z]
+Success: Statement parsed cleanly.
 
 Statement number: 67
 Identifying statement: select y, z from st
@@ -436,7 +480,8 @@ Parsing SELECT statement:
 Statement number: 68
 Identifying statement:  describe st
 Statement identified:  DESCRIBE
-Describing Table: [st]
+  Table Name: [st]
+Describing Table: [EOF]
 
 Statement number: 69
 Identifying statement:   Select max(gpa) from st

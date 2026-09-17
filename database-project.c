@@ -104,8 +104,6 @@ typedef enum {
     TOKEN_INPUT,
     TOKEN_EXIT,
 
-    
-    TOKEN_INTO,
     TOKEN_FROM,
     TOKEN_VALUES,
     TOKEN_WHERE,
@@ -129,7 +127,6 @@ typedef enum {
     TOKEN_EOF,
     TOKEN_ERROR,
 
-
     //Tokens for column data types
     TOKEN_TEXT,
     TOKEN_INTEGER,
@@ -139,42 +136,41 @@ typedef enum {
     TOKEN_KEY,
 } TokenType;
 
-void print_token_type(TokenType type) {
-    switch (type) {
-        case TOKEN_CREATE: printf("TOKEN_CREATE"); break;
-        case TOKEN_USE: printf("TOKEN_USE"); break;
-        case TOKEN_DESCRIBE: printf("TOKEN_DESCRIBE"); break;
-        case TOKEN_SELECT: printf("TOKEN_SELECT"); break;
-        case TOKEN_LET: printf("TOKEN_LET"); break;
-        case TOKEN_INSERT: printf("TOKEN_INSERT"); break;
-        case TOKEN_UPDATE: printf("TOKEN_UPDATE"); break;
-        case TOKEN_DELETE: printf("TOKEN_DELETE"); break;
-        case TOKEN_RENAME: printf("TOKEN_RENAME"); break;
-        case TOKEN_INPUT: printf("TOKEN_INPUT"); break;
-        case TOKEN_EXIT: printf("TOKEN_EXIT"); break;
-        case TOKEN_INTO: printf("TOKEN_INTO"); break;
-        case TOKEN_FROM: printf("TOKEN_FROM"); break;
-        case TOKEN_VALUES: printf("TOKEN_VALUES"); break;
-        case TOKEN_WHERE: printf("TOKEN_WHERE"); break;
-        case TOKEN_AND: printf("TOKEN_AND"); break;
-        case TOKEN_OR: printf("TOKEN_OR"); break;
-        case TOKEN_IDENTIFIER: printf("TOKEN_IDENTIFIER"); break;
-        case TOKEN_NUMBER: printf("TOKEN_NUMBER"); break;
-        case TOKEN_STRING: printf("TOKEN_STRING"); break;
-        case TOKEN_COMMA: printf("TOKEN_COMMA"); break;
-        case TOKEN_ASTERISK: printf("TOKEN_ASTERISK"); break;
-        case TOKEN_LPAREN: printf("TOKEN_LPAREN"); break;
-        case TOKEN_RPAREN: printf("TOKEN_RPAREN"); break;
-        case TOKEN_EQUAL: printf("TOKEN_EQUAL"); break;
-        case TOKEN_NOT_EQUAL: printf("TOKEN_NOT_EQUAL"); break;
-        case TOKEN_GREATER: printf("TOKEN_GREATER"); break;
-        case TOKEN_LESS: printf("TOKEN_LESS"); break;
-        case TOKEN_GREATER_EQUAL: printf("TOKEN_GREATER_EQUAL"); break;
-        case TOKEN_LESS_EQUAL: printf("TOKEN_LESS_EQUAL"); break;
-        case TOKEN_EOF: printf("TOKEN_EOF"); break;
-        case TOKEN_ERROR: printf("TOKEN_ERROR"); break;
-    }
-}
+// void print_token_type(TokenType type) {
+//     switch (type) {
+//         case TOKEN_CREATE: printf("TOKEN_CREATE"); break;
+//         case TOKEN_USE: printf("TOKEN_USE"); break;
+//         case TOKEN_DESCRIBE: printf("TOKEN_DESCRIBE"); break;
+//         case TOKEN_SELECT: printf("TOKEN_SELECT"); break;
+//         case TOKEN_LET: printf("TOKEN_LET"); break;
+//         case TOKEN_INSERT: printf("TOKEN_INSERT"); break;
+//         case TOKEN_UPDATE: printf("TOKEN_UPDATE"); break;
+//         case TOKEN_DELETE: printf("TOKEN_DELETE"); break;
+//         case TOKEN_RENAME: printf("TOKEN_RENAME"); break;
+//         case TOKEN_INPUT: printf("TOKEN_INPUT"); break;
+//         case TOKEN_EXIT: printf("TOKEN_EXIT"); break;
+//         case TOKEN_FROM: printf("TOKEN_FROM"); break;
+//         case TOKEN_VALUES: printf("TOKEN_VALUES"); break;
+//         case TOKEN_WHERE: printf("TOKEN_WHERE"); break;
+//         case TOKEN_AND: printf("TOKEN_AND"); break;
+//         case TOKEN_OR: printf("TOKEN_OR"); break;
+//         case TOKEN_IDENTIFIER: printf("TOKEN_IDENTIFIER"); break;
+//         case TOKEN_NUMBER: printf("TOKEN_NUMBER"); break;
+//         case TOKEN_STRING: printf("TOKEN_STRING"); break;
+//         case TOKEN_COMMA: printf("TOKEN_COMMA"); break;
+//         case TOKEN_ASTERISK: printf("TOKEN_ASTERISK"); break;
+//         case TOKEN_LPAREN: printf("TOKEN_LPAREN"); break;
+//         case TOKEN_RPAREN: printf("TOKEN_RPAREN"); break;
+//         case TOKEN_EQUAL: printf("TOKEN_EQUAL"); break;
+//         case TOKEN_NOT_EQUAL: printf("TOKEN_NOT_EQUAL"); break;
+//         case TOKEN_GREATER: printf("TOKEN_GREATER"); break;
+//         case TOKEN_LESS: printf("TOKEN_LESS"); break;
+//         case TOKEN_GREATER_EQUAL: printf("TOKEN_GREATER_EQUAL"); break;
+//         case TOKEN_LESS_EQUAL: printf("TOKEN_LESS_EQUAL"); break;
+//         case TOKEN_EOF: printf("TOKEN_EOF"); break;
+//         case TOKEN_ERROR: printf("TOKEN_ERROR"); break;
+//     }
+// }
 // Token structure
 typedef struct {
     TokenType type;
@@ -329,7 +325,6 @@ Token next_token(ParserState* state) {
         else if (strcasecmp(token.text, "RENAME") == 0) token.type = TOKEN_RENAME;
         else if (strcasecmp(token.text, "INPUT") == 0) token.type = TOKEN_INPUT;
         else if (strcasecmp(token.text, "EXIT") == 0) token.type = TOKEN_EXIT;
-        else if (strcasecmp(token.text, "INTO") == 0) token.type = TOKEN_INTO;
         else if (strcasecmp(token.text, "FROM") == 0) token.type = TOKEN_FROM;
         else if (strcasecmp(token.text, "VALUES") == 0) token.type = TOKEN_VALUES;
         else if (strcasecmp(token.text, "WHERE") == 0) token.type = TOKEN_WHERE;
@@ -512,12 +507,6 @@ void parse_insert(ParserState* state) {
     }
     advance(state); // Consume INSERT
 
-    if (state->current_token.type != TOKEN_INTO) {
-        printf("Syntax Error: Expected INTO after INSERT near '%s'\n", state->current_token.text);
-        return;
-    }
-    advance(state); // Consume INTO
-
     if (state->current_token.type != TOKEN_IDENTIFIER) {
         printf("Syntax Error: Expected target table name near '%s'\n", state->current_token.text);
         return;
@@ -530,7 +519,7 @@ void parse_insert(ParserState* state) {
         return;
     }
     advance(state); // Consume VALUES
-
+    
     if (state->current_token.type != TOKEN_LPAREN) {
         printf("Syntax Error: Expected '(' opening values payload near '%s'\n", state->current_token.text);
         return;
@@ -542,24 +531,20 @@ void parse_insert(ParserState* state) {
         if (state->current_token.type == TOKEN_NUMBER || state->current_token.type == TOKEN_IDENTIFIER) {
             printf("[%s] ", state->current_token.text);
             advance(state);
-        } else {
+        } else if (state->current_token.type == TOKEN_STRING) {
+            printf("[\"%s\"] ", state->current_token.text);
+            advance(state);
+        }else if (state->current_token.type == TOKEN_COMMA) {
+            advance(state);
+        } else if (state->current_token.type == TOKEN_RPAREN) {
+            advance(state); // Consume ')'
+            break; // End of values
+        }else {
             printf("\nSyntax Error: Expected continuous value entry near '%s'\n", state->current_token.text);
             return;
         }
-
-        if (state->current_token.type == TOKEN_COMMA) {
-            advance(state);
-        } else {
-            break;
-        }
     }
     printf("\n");
-
-    if (state->current_token.type != TOKEN_RPAREN) {
-        printf("Syntax Error: Missing close parenthesis ')' payload container near '%s'\n", state->current_token.text);
-        return;
-    }
-    advance(state); // Consume ')'
 
     if (state->current_token.type == TOKEN_EOF) {
         printf("Success: Statement parsed cleanly.\n");
@@ -666,8 +651,17 @@ void parse_describe (ParserState* state) {
         return;
     }
 
-    printf("Describing Table: [%s]\n", state->current_token.text);
-    advance(state); // Consume table name
+    if (state->current_token.type == TOKEN_IDENTIFIER) {
+        printf("  Table Name: [%s]\n", state->current_token.text);
+        advance(state); // Consume table name
+    } else if (strcasecmp(state->current_token.text, "ALL") == 0) {
+        printf("  Describing all tables in the database\n");
+        advance(state); // Consume ALL
+    }else {
+        printf("Syntax Error: Expected table name after DESCRIBE near '%s'\n", state->current_token.text);
+        return;
+    }
+
 }
 
 void parse_let (ParserState* state) {
@@ -701,6 +695,55 @@ void parse_let (ParserState* state) {
 
     // Goes to Select statement per spec
     parse_select(state);
+}
+
+void parse_rename (ParserState* state) {
+    if (state->current_token.type != TOKEN_RENAME) {
+        printf("Syntax Error: Expected RENAME near '%s'\n", state->current_token.text);
+        return;
+    }
+
+    advance(state); // Consume RENAME
+
+    if (state->current_token.type != TOKEN_IDENTIFIER) {
+        printf("Syntax Error: Expected old table name after RENAME near '%s'\n", state->current_token.text);
+        return;
+    } else if (state->current_token.type == TOKEN_IDENTIFIER) {
+        printf("  Old Table Name: [%s]\n", state->current_token.text);
+        advance(state); // Consume old table name
+    }else {
+        printf("Syntax Error: Expected new table name after old table name in RENAME statement near '%s'\n", state->current_token.text);
+        return;
+    }
+
+    if (state->current_token.type == TOKEN_LPAREN) {
+        advance(state); // Consume '('
+        while (state->current_token.type != TOKEN_RPAREN) {
+            if (state->current_token.type == TOKEN_IDENTIFIER) {
+                printf("  New Attribute of Table Name: [%s]\n", state->current_token.text);
+                advance(state); // Consume new table name
+            } else if (state->current_token.type == TOKEN_COMMA) {
+                advance(state); // Consume comma and continue with more table names
+            }else {
+                printf("Syntax Error: Expected new table name after old table name in RENAME statement near '%s'\n", state->current_token.text);
+                return;
+            }
+        }
+        advance(state); // Consume ')'
+    }
+
+    if (state->current_token.type == TOKEN_EOF) {
+        printf("Success: Statement parsed cleanly.\n");
+    } else {
+        printf("Syntax Error: Trailing unexpected tokens left over.\n");
+        printf("  Remaining tokens: ");
+        while (state->current_token.type != TOKEN_EOF) {
+            printf("[%s] ", state->current_token.text);
+            advance(state);
+        }
+        printf("\n");
+    }
+
 }
 
 void statement_identifier(char *statement) {
@@ -757,6 +800,8 @@ void statement_identifier(char *statement) {
         printf("Statement identified:  DELETE\n");
     } else if (strcmp(lower_command, "rename") == 0) {
         printf("Statement identified:  RENAME\n");
+        advance(&state);
+        parse_rename(&state);
     } else if (strcmp(lower_command, "input") == 0) {
         printf("Statement identified:  INPUT\n");
     } else if (strcmp(lower_command, "exit") == 0) {
