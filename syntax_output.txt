@@ -1,0 +1,275 @@
+Database Project tldairy dnguye24
+=====================================================
+Number of statements: 38
+
+Statement number: 1
+Identifying statement:CREATE DATABASE university
+Statement identified:  CREATE
+  Creating Database(s):[university] 
+
+Statement number: 2
+Identifying statement:    use university
+Statement identified:  USE
+Using Database: [university]
+
+Statement number: 3
+Identifying statement:    USE  university  
+Statement identified:  USE
+Using Database: [university]
+
+Statement number: 4
+Identifying statement:    create table student (id integer primary key, name text, gpa float)
+Statement identified:  CREATE
+Parsing CREATE TABLE statement:
+  Table Name: [student]
+  Column Name: [id] Type: [integer]
+  PRIMARY KEY designation found for column.
+  Column Name: [name] Type: [text]
+  Column Name: [gpa] Type: [float]
+
+Statement number: 5
+Identifying statement:    CREATE TABLE employee(ssn integer primary key,name text,salary float)
+Statement identified:  CREATE
+Parsing CREATE TABLE statement:
+  Table Name: [employee]
+  Column Name: [ssn] Type: [integer]
+  PRIMARY KEY designation found for column.
+  Column Name: [name] Type: [text]
+  Column Name: [salary] Type: [float]
+
+Statement number: 6
+Identifying statement:    create table course ( cid integer, title text, credits integer ) 
+Statement identified:  CREATE
+Parsing CREATE TABLE statement:
+  Table Name: [course]
+  Column Name: [cid] Type: [integer]
+  Column Name: [title] Type: [text]
+  Column Name: [credits] Type: [integer]
+
+Statement number: 7
+Identifying statement:    DESCRIBE student
+Statement identified:  DESCRIBE
+  Table Name: [student]
+
+Statement number: 8
+Identifying statement:    describe ALL
+Statement identified:  DESCRIBE
+  Table Name: [ALL]
+
+Statement number: 9
+Identifying statement:    DESCRIBE
+Statement identified:  DESCRIBE
+Syntax Error: Expected table name after DESCRIBE near 'EOF'
+Semantic error: expected a table name after DESCRIBE near ''.
+
+Statement number: 10
+Identifying statement:    RENAME student (studentid, fullname, gradepointaverage)
+Statement identified:  RENAME
+  Old Table Name: [student]
+  New Attribute of Table Name: [studentid]
+  New Attribute of Table Name: [fullname]
+  New Attribute of Table Name: [gradepointaverage]
+Success: Statement parsed cleanly.
+
+Statement number: 11
+Identifying statement:    rename employee(empid,fullname,pay)
+Statement identified:  RENAME
+  Old Table Name: [employee]
+  New Attribute of Table Name: [empid]
+  New Attribute of Table Name: [fullname]
+  New Attribute of Table Name: [pay]
+Success: Statement parsed cleanly.
+
+Statement number: 12
+Identifying statement:    RENAME course (cid)
+Statement identified:  RENAME
+  Old Table Name: [course]
+  New Attribute of Table Name: [cid]
+Success: Statement parsed cleanly.
+Semantic error: RENAME for table 'course' requires 3 column names, but received 1.
+
+Statement number: 13
+Identifying statement:    insert student values (123, "John Doe", 3.5)
+Statement identified:  INSERT
+  Target Table: [student]
+  Values Inserted: [123] ["John Doe"] [3.5] 
+Success: Statement parsed cleanly.
+
+Statement number: 14
+Identifying statement:    INSERT employee VALUES(111222333,"Alice Brown",55000.00)
+Statement identified:  INSERT
+  Target Table: [employee]
+  Values Inserted: [111222333] ["Alice Brown"] [55000.00] 
+Success: Statement parsed cleanly.
+
+Statement number: 15
+Identifying statement:    insert course values (10, "Databases", 3, "extra")
+Statement identified:  INSERT
+  Target Table: [course]
+  Values Inserted: [10] ["Databases"] [3] ["extra"] 
+Success: Statement parsed cleanly.
+Semantic error: table 'course' expects 3 values, but INSERT supplies 4.
+
+Statement number: 16
+Identifying statement:    UPDATE student SET gpa = 3.9 WHERE id=123
+Statement identified:  UPDATE
+  Target Table: [student]
+  AttrName: [gpa] [op:=]   New Value: [3.9]   Condition: [id] [op:=] [123] 
+Semantic error: column 'gpa' does not exist in table 'student'.
+
+Statement number: 17
+Identifying statement:    update employee set salary=60000.5, name="Bob Carter" where ssn=111222444
+Statement identified:  UPDATE
+  Target Table: [employee]
+  AttrName: [salary] [op:=]   New Value: [60000.5] 
+Syntax Error: Expected attribute name in UPDATE statement near ','
+Semantic error: column 'salary' does not exist in table 'employee'.
+
+Statement number: 18
+Identifying statement:    UPDATE student SET WHERE id=123
+Statement identified:  UPDATE
+  Target Table: [student]
+  Condition: [id] [op:=] [123] 
+Semantic error: column 'WHERE' does not exist in table 'student'.
+
+Statement number: 19
+Identifying statement:    SELECT id, name FROM student WHERE gpa>3.0
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [id] [name] 
+  From Tables: [student] 
+  Condition: [gpa] [op:>] [3.0] 
+  Success: Statement parsed cleanly.
+Semantic error: column 'id' does not exist in the selected tables.
+
+Statement number: 20
+Identifying statement:    select id,name,gpa from student where gpa>3.0 and id<126
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [id] [name] [gpa] 
+  From Tables: [student] 
+  Condition: [gpa] [op:>] [3.0] 
+  Logic: [and]   Condition: [id] [op:<] [126] 
+  Success: Statement parsed cleanly.
+Semantic error: column 'id' does not exist in the selected tables.
+
+Statement number: 21
+Identifying statement:    select count(*) from student
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [count(*)] 
+  From Tables: [student] 
+  Success: Statement parsed cleanly.
+
+Statement number: 22
+Identifying statement:    select max(gpa) from student
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [max(gpa)] 
+  From Tables: [student] 
+  Success: Statement parsed cleanly.
+Semantic error: column 'gpa' does not exist in the selected tables.
+
+Statement number: 23
+Identifying statement:    select min (gpa) from student
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [min(gpa)] 
+  From Tables: [student] 
+  Success: Statement parsed cleanly.
+Semantic error: column 'gpa' does not exist in the selected tables.
+
+Statement number: 24
+Identifying statement:    SELECT Average(gpa) FROM student WHERE gpa>0
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [Average(gpa)] 
+  From Tables: [student] 
+  Condition: [gpa] [op:>] [0] 
+  Success: Statement parsed cleanly.
+Semantic error: column 'gpa' does not exist in the selected tables.
+
+Statement number: 25
+Identifying statement:    select from student where id=123
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: 
+Syntax Error: Expected column name, '*' or aggregate function near 'from'
+Semantic error: SELECT requires a FROM clause.
+
+Statement number: 26
+Identifying statement:    select id name from student where id=123
+Statement identified:  SELECT
+Parsing SELECT statement:
+  Columns: [id] 
+Syntax Error: Missing FROM clause near 'name'
+Semantic error: SELECT requires a FROM clause.
+
+Statement number: 27
+Identifying statement:    LET honorRoll KEY id SELECT id, name, gpa FROM student WHERE gpa>=3.5
+Statement identified:  LET
+Storing under table name: [honorRoll]
+Attribute Column Name: [id]
+Parsing SELECT statement:
+  Columns: [id] [name] [gpa] 
+  From Tables: [student] 
+  Condition: [gpa] [op:>=] [3.5] 
+  Success: Statement parsed cleanly.
+Semantic error: column 'id' does not exist in the selected tables.
+
+Statement number: 28
+Identifying statement:    LET  honorRoll  KEY id  SELECT id, name FROM student WHERE gpa>=3.5
+Statement identified:  LET
+Storing under table name: [honorRoll]
+Attribute Column Name: [id]
+Parsing SELECT statement:
+  Columns: [id] [name] 
+  From Tables: [student] 
+  Condition: [gpa] [op:>=] [3.5] 
+  Success: Statement parsed cleanly.
+Semantic error: column 'id' does not exist in the selected tables.
+
+Statement number: 29
+Identifying statement:    LET honorRoll SELECT id FROM student
+Statement identified:  LET
+Storing under table name: [honorRoll]
+Syntax Error: Expected KEY after variable name in LET statement near 'SELECT'
+Semantic error: LET syntax is LET name KEY column SELECT ... .
+
+Statement number: 30
+Identifying statement:    DELETE student WHERE id=125
+Statement identified:  DELETE
+Semantic error: column 'id' does not exist in the selected tables.
+
+Statement number: 31
+Identifying statement:    delete employee
+Statement identified:  DELETE
+
+Statement number: 32
+Identifying statement:    DELETE FROM student WHERE id=126
+Statement identified:  DELETE
+Semantic error: column 'id' does not exist in the selected tables.
+
+Statement number: 33
+Identifying statement:    INPUT a.dat
+Statement identified:  INPUT
+
+Statement number: 34
+Identifying statement:    input a.dat output b.dat
+Statement identified:  INPUT
+
+Statement number: 35
+Identifying statement:    INPUT OUTPUT b.dat
+Statement identified:  INPUT
+
+Statement number: 36
+Identifying statement:    EXIT
+Statement identified:  EXIT
+
+Statement number: 37
+Identifying statement:    exit    exit
+Statement identified:  EXIT
+
+Statement number: 38
+Identifying statement:  
+Empty statement

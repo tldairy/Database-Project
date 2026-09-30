@@ -3,9 +3,8 @@
 #include <ctype.h>
 #include <string.h>
 #include <unistd.h>
-
-const size_t MAX_BUFFER = 256;
-
+#include "globals.h"
+#include "semantic_analyzer.h"
 
 void tokenize(char *query, char tokens[][32], int *num_tokens) {
     char *token = strtok(query, " ");
@@ -629,7 +628,7 @@ void parse_create_table (ParserState* state) {
             return;
         }
     }
-    
+
 }
 
 void parse_create (ParserState* state) {
@@ -834,6 +833,7 @@ void statement_identifier(char *statement) {
     ParserState state;
     char command_buffer[128];
     char lower_command[32];
+    int analyze_semantics = 0;
 
     state.source = statement;
     state.cursor = 0;
@@ -853,42 +853,53 @@ void statement_identifier(char *statement) {
     lower_command[i] = '\0';
 
     if (strcmp(lower_command, "create") == 0) {
+        analyze_semantics = 1;
         printf("Statement identified:  CREATE\n");
         advance(&state);
         parse_create(&state);
     } else if (strcmp(lower_command, "use") == 0) {
+        analyze_semantics = 1;
         printf("Statement identified:  USE\n");
         advance(&state);
         parse_use(&state);
     } else if (strcmp(lower_command, "describe") == 0 || strcmp(lower_command, "desc") == 0) {
+        analyze_semantics = 1;
         printf("Statement identified:  DESCRIBE\n");
         advance(&state);
         parse_describe(&state);
     } else if (strcmp(lower_command, "select") == 0) {
+        analyze_semantics = 1;
         printf("Statement identified:  SELECT\n");
         advance(&state);
         parse_select(&state);
     } else if (strcmp(lower_command, "let") == 0) {
+        analyze_semantics = 1;
         printf("Statement identified:  LET\n");
         advance(&state);
         parse_let(&state);
     } else if (strcmp(lower_command, "insert") == 0) {
+        analyze_semantics = 1;
         printf("Statement identified:  INSERT\n");
         advance(&state);
         parse_insert(&state);
     } else if (strcmp(lower_command, "update") == 0) {
+        analyze_semantics = 1;
         printf("Statement identified:  UPDATE\n");
         advance(&state);
         parse_update(&state);
     } else if (strcmp(lower_command, "delete") == 0) {
+        analyze_semantics = 1;
         printf("Statement identified:  DELETE\n");
     } else if (strcmp(lower_command, "rename") == 0) {
+        analyze_semantics = 1;
         printf("Statement identified:  RENAME\n");
         advance(&state);
         parse_rename(&state);
     } else if (strcmp(lower_command, "input") == 0) {
+        analyze_semantics = 1;
         printf("Statement identified:  INPUT\n");
     } else if (strcmp(lower_command, "exit") == 0) {
+        analyze_semantics = 1;
         printf("Statement identified:  EXIT\n");
     } else if (strcmp(lower_command, "--") == 0) {
         printf("Skipping comment\n");
@@ -896,21 +907,8 @@ void statement_identifier(char *statement) {
     else {
         printf("Unknown statement type: %s\n", command);
     }
-}
 
-int main(void){
-    printf("Database Project tldairy dnguye24\n");
-    printf("=====================================================\n");
-    char separated_statements[100][MAX_BUFFER]; //100 Statements Only
-    int num_statements = 0;
-
-    statement_separator(separated_statements, &num_statements);
-
-    printf("Number of statements: %d\n", num_statements);
-    for (int i = 0; i < num_statements; i++) {
-        printf("\nStatement number: %d\n", i + 1);
-        statement_identifier(separated_statements[i]);
+    if (analyze_semantics) {
+        semantic_analyze_statement(statement);
     }
-
-    return 0;
 }
