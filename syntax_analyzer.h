@@ -4,6 +4,6 @@
 #include "globals.h"
 
 void statement_separator(char separated_statements[][MAX_BUFFER], int *num_statements);
-void statement_identifier(char *statement);
+int statement_identifier(char *statement);
 
 #endif
